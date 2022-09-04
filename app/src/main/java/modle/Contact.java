@@ -1,3 +1,5 @@
+/**A Class to specify the a single contact*/
+
 package modle;
 
 public class Contact {
@@ -5,7 +7,7 @@ public class Contact {
     private String name;
     private String phone;
 
-    // CONSTRUCTORS
+    /**CONSTRUCTORS for different types of argument*/
     public Contact(int id, String name, String phone) {
         this.id = id;
         this.name = name;
@@ -19,7 +21,7 @@ public class Contact {
 
     }
 
-    // GETTER AND SETTER
+    /** GETTER AND SETTER to set and retrieve the values*/
     public int getId() {
         return id;
     }

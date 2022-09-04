@@ -1,3 +1,6 @@
+/**
+ Param class to initialize all the parameters of the database
+ */
 package parameters;
 
 public class Param {
