@@ -6,8 +6,7 @@ public class Param {
     public static final String TABLE_NAME = "CONTACTS";
 
     //VALUES IN THE TABLES
-
-    public static final String KEY_ID = "id";
-    public static final String KEY_NAME = "name";
-    public static final String KEY_PHONE = "phone";
+    public static final String KEY_ID = "ID";
+    public static final String KEY_NAME = "NAME";
+    public static final String KEY_PHONE = "PHONE_NUMBER";
 }

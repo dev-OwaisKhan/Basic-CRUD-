@@ -2,12 +2,16 @@ package data;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.contacts.MainActivity;
 import com.example.contacts.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import modle.Contact;
 import parameters.Param;
@@ -22,10 +26,10 @@ public class DataHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create  = "CREATE TABLE " + Param.TABLE_NAME + "(" + Param.KEY_ID+ "INTEGER PRIMARY KEY, "
-                + Param.KEY_NAME + "TEXT, "+ Param.KEY_PHONE + "TEXT" + ")";
-        Log.d("Owais","run");
+        String create  = "CREATE TABLE " + Param.TABLE_NAME + "(" + Param.KEY_ID+ " INTEGER PRIMARY KEY, "
+                + Param.KEY_NAME + " TEXT, "+ Param.KEY_PHONE + " TEXT" + ")";
         db.execSQL(create);
+        Log.d("Owais","run");
 
     }
 
@@ -43,8 +47,29 @@ public class DataHandler extends SQLiteOpenHelper {
         values.put(Param.KEY_PHONE,contact.getPhone());
 
         db.insert(Param.TABLE_NAME,null,values);
-        Log.d("Owais","INserted");
         db.close();
+    }
+
+    public List<Contact> allcontacts (){
+        List <Contact> contactList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String select = "SELECT * FROM " + Param.TABLE_NAME;
+        Cursor cursor = db.rawQuery(select,null);
+
+
+        if(cursor.moveToFirst())
+        {
+            do {
+                Contact contact = new Contact();
+                contact.setId(Integer.parseInt(cursor.getString(0)));
+                contact.setName(cursor.getString(1));
+                contact.setPhone(cursor.getString(2));
+                contactList.add(contact);
+            }while(cursor.moveToNext());
+        }
+        return contactList;
+
     }
 
 }
