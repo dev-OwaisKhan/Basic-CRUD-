@@ -16,9 +16,9 @@ Issue with could lead to the fail of app. But again is just basic concept. And I
 used to perform all the function as a Contacts app.
 </p>
 <h3> ❗Important</h3>
-<p align="left">
- All the desired output is shown in the Logcat window which can be seen in the Android Studio.
-</p>
+<h6> -> The id of the contacts can that you can get from the ListView (which will be shown when click on the get contacts button).</h6>
+<h6> -> To delete any contact you will only need the id of the contact.</h6>
+<h6> -> To update contact give id and use the same feild to give name and phone.</h6>
 
 <h4 align="left">💌Really appreciate all the messages/mails. What you waiting for, you drop one too.</h4>
 
