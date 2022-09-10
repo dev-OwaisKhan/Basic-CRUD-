@@ -34,7 +34,7 @@ public class List_show extends AppCompatActivity {
         List<Contact> all_contact = handler.all_contacts();
         for (Contact contact : all_contact)
         {
-           contacts.add(contact.getName()+"   "+contact.getPhone());
+           contacts.add(contact.getId()+"  "+contact.getName()+"  "+contact.getPhone());
         }
 
         /* Setting the array adapter*/
