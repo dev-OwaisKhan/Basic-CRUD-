@@ -2,22 +2,19 @@ package com.example.contacts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.Toast;
 
 import data.DataHandler;
 import modle.Contact;
 
 public class MainActivity extends AppCompatActivity {
 
-    /** declaring all the variables*/
+    /* declaring all the variables*/
     EditText name, phone,id;
     String name_text, phone_text;
     int id_text,rows;
@@ -27,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /**An object of the DataHandler class to perform all the Database Operations*/
+        /*An object of the DataHandler class to perform all the Database Operations*/
         DataHandler handler = new DataHandler(MainActivity.this);
 
-        /** Object of Contact type to Store the relative data*/
+        /* Object of Contact type to Store the relative data*/
         Contact obj = new Contact();
 
-        /** Initialising all the variables */
+        /* Initialising all the variables */
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
         id = findViewById(R.id.id);
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         update = findViewById(R.id.update);
         delete = findViewById(R.id.delete);
 
-        /** Button to add data to the database */
+        /* Button to add data to the database */
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,27 +47,26 @@ public class MainActivity extends AppCompatActivity {
                 phone_text = phone.getText().toString();
                 obj.setName(name_text);
                 obj.setPhone(phone_text);
-                handler.addcontact(obj);
+                handler.add_contact(obj);
+
+                /* Toast message to keep track */
+                Toast.makeText(MainActivity.this,"Contact Added", Toast.LENGTH_SHORT).show();
             }
         });
 
-        /**Button to retrieve the stored data*/
+        /*Button to retrieve the stored data*/
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                List<Contact> allcontant = handler.allcontacts();
-                for (Contact contact : allcontant)
-                {
-                    // Log Message
-                    Log.d("owais","id" +contact.getId()+"\n"+
-                            "Name " +contact.getName()+ "\n"+
-                            "Phone Number " +contact.getPhone());
-                }
+                // Intent to go to List_show activity
+                Intent intent = new Intent(MainActivity.this,List_show.class);
+                startActivity(intent);
+
             }
         });
 
-        /** Button to update the data (using primary key)
+        /* Button to update the data (using primary key)
         primary key is something that is unique for every entry in the base*/
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,19 +77,23 @@ public class MainActivity extends AppCompatActivity {
                 obj.setName(name_text);
                 obj.setPhone(phone_text);
                 obj.setId(id_text);
-                rows = handler.updatecontact(obj);
-                //Log Message
-                Log.d("Owais ", "Updated rows = "+rows);
+                rows = handler.update_contact(obj);
+
+                /* Toast message to keep track */
+                Toast.makeText(MainActivity.this,rows+" Rows updated", Toast.LENGTH_SHORT).show();
 
             }
         });
 
-        /** Button to delete the data (using primary key)*/
+        /* Button to delete the data (using primary key)*/
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 id_text = Integer.parseInt(id.getText().toString());
-                handler.deletecontact(id_text);
+                handler.delete_contact(id_text);
+
+                /* Toast message to keep track */
+                Toast.makeText(MainActivity.this,"Contact delete", Toast.LENGTH_SHORT).show();
 
             }
         });
